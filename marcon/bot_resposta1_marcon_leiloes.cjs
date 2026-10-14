@@ -138,8 +138,13 @@ async function processarMensagem(msg) {
     .slice(0, 140);
 
   log(`Lance livre identificado com sucesso: ${titulo}`);
+  log(`Aguardando 3 segundos antes de enviar o lance...`);
 
-  await client.sendMessage(GRUPO_ID, RESPOSTA);
+  // --- ADICIONE O TEMPO AQUI (3000 = 3 segundos, 5000 = 5 segundos, etc.) ---
+  await new Promise(resolve => setTimeout(resolve, 3000));
+  // -------------------------------------------------------------------------
+
+  await client.sendMessage(GRUPO_ID, RESPOSTA); // <--- AQUI A MENSAGEM É ENVIADA
   log(`[ENVIADO "${RESPOSTA}"] Item: "${titulo}" | ID da mensagem: ${msg.id?._serialized}`);
   
   registrarLog(msg.body, "POSITIVO");
