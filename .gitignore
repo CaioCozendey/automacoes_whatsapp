@@ -1,0 +1,7 @@
+node_modules/
+.sessao-whatsapp/
+.wwebjs_auth/
+.wwebjs_cache/
+processadas.json
+processadas.json.tmp
+.env
