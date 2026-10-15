@@ -93,7 +93,8 @@ function initializeClient() {
     log(`Carregando: ${percent}% | ${mensagem}`);
     if (Number(percent) >= 100) {
       log("WhatsApp 100% carregado!");
-      inicioMonitoramento = Math.floor(Date.now() / 1000);
+      // Define o monitoramento para começar lendo as mensagens das últimas 2 horas (7200 segundos)
+      inicioMonitoramento = Math.floor(Date.now() / 1000) - 7200;
       pronto = true; 
       log(`Bot ativo no grupo ID: ${GRUPO_ID}`);
       log('Novos anúncios com "Lance inicial: LIVRE" receberão "1".');
@@ -112,7 +113,8 @@ function initializeClient() {
     
     setTimeout(() => {
       if (!pronto) {
-        inicioMonitoramento = Math.floor(Date.now() / 1000);
+        // Define o monitoramento para as últimas 2 horas
+        inicioMonitoramento = Math.floor(Date.now() / 1000) - 7200;
         pronto = true; 
         log("WhatsApp pronto e monitoramento ativado por segurança!");
         log(`Bot ativo no grupo ID: ${GRUPO_ID}`);
@@ -121,10 +123,7 @@ function initializeClient() {
   });
 
   client.on("message", (msg) => {
-    console.log(`Mensagem recebida no grupo ${msg.from}: ${msg.body}`);
-    if (msg.from === GRUPO_ID) {
-      log(`[RASTREAMENTO] Mensagem recebida no grupo.`);
-    }
+    // Logs de recepção de todas as mensagens removidos para não travar o terminal durante a sincronização
 
     if (!pronto || pausadoPorErro || encerrando) return;
     if (msg.fromMe || msg.from !== GRUPO_ID) return;
@@ -167,12 +166,12 @@ async function processarMensagem(msg) {
   if (!pronto || pausadoPorErro || encerrando) return;
   if (msg.fromMe || msg.from !== GRUPO_ID) return;
 
-  log(`Analisando mensagem de ${msg.author || msg.from}: \n--- TEXTO ---\n${msg.body}\n------------`);
-
   if (!msg.timestamp || msg.timestamp <= inicioMonitoramento) {
-    log("-> Ignorado: Mensagem anterior à ativação do bot.");
+    // Retorna silenciosamente para mensagens mais antigas que 2h
     return;
   }
+
+  log(`Analisando mensagem de ${msg.author || msg.from}: \n--- TEXTO ---\n${msg.body}\n------------`);
 
   if (!temLanceLivre(msg.body)) {
     log("-> Ignorado: Não possui 'lance inicial livre'.");
