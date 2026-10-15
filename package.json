@@ -7,9 +7,11 @@
     "start": "node marcon/bot_resposta1_marcon_leiloes.cjs"
   },
   "dependencies": {
+    "@whiskeysockets/baileys": "^7.0.0-rc14",
     "express": "^4.18.2",
+    "pino": "^10.4.0",
+    "puppeteer": "^25.14.0",
     "qrcode-terminal": "^0.12.0",
-    "whatsapp-web.js": "^1.23.0",
-    "puppeteer": "^21.0.0"
+    "whatsapp-web.js": "^1.23.0"
   }
 }

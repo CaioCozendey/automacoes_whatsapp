@@ -1,7 +1,11 @@
 node_modules/
 .sessao-whatsapp/
+.sessao_baileys/
+.sessao-limpeza/
 .wwebjs_auth/
 .wwebjs_cache/
 processadas.json
 processadas.json.tmp
 .env
+sessao_baileys/
+sessao-limpeza/
