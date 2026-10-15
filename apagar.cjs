@@ -114,7 +114,7 @@ function initializeClient() {
     setTimeout(() => {
       if (!pronto) {
         // Define o monitoramento para as últimas 2 horas
-        inicioMonitoramento = Math.floor(Date.now() / 1000) - 7200;
+        inicioMonitoramento = Math.floor(Date.now() / 1000) - 1800;
         pronto = true; 
         log("WhatsApp pronto e monitoramento ativado por segurança!");
         log(`Bot ativo no grupo ID: ${GRUPO_ID}`);
