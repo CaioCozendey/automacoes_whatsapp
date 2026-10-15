@@ -151,6 +151,7 @@ async function processarMensagem(msg) {
 }
 
 client.on("message", (msg) => {
+  console.log(`Mensagem recebida no grupo ${msg.from}: ${msg.body}`);
   if (msg.from === GRUPO_ID) {
     log(`[RASTREAMENTO] Mensagem recebida no grupo.`);
   }
